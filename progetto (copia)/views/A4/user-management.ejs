@@ -1,0 +1,93 @@
+<%- include('partials/barrasuperiore', { cssFile: 'small-business.css' }) %>
+
+<!-- Page Content -->
+<div class="container">
+  <!-- Content Row -->
+  <div class="row my-5">
+    <div class="col-md-12">
+      <div class="card rounded-0">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-4">
+            <h3 class="card-title">Users Management</h3>
+            <div class="text-right ml-auto">
+              <a class="btn text-white btn-sm btn-primary mr-2" href="#">
+                <i class="fas fa-user-plus mr-2"></i>
+                New user
+              </a>
+            </div>
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Role</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% 
+              for (var i = 0; i < utenti.length; i++) { 
+                if (utenti[i].active == '1') {
+                  var classe ="";
+                  var testo ="Ban this user"
+                  var casella ="fas fa-ban"
+                }
+                else {
+                  var classe = "bg-warning text-white";
+                  var testo ="Un-Ban this user"
+                  var casella ="fas fa-eye"
+                }
+                %>
+              <tr class="<%=classe%>">
+
+                <th scope="row"><%= i+1 %></th>
+                <td><%= utenti[i].firstname %></td>
+                <td><%=utenti[i].lastname %></td>
+                <td><%=utenti[i].role %></td>
+                <td>
+                  <a href="#" data-toggle="tooltip" data-placement="top" title="Edit this user"
+                    class="btn btn-sm btn-outline-secondary mr-2"><i class="fas fa-pen"></i></a>
+                  <a href="/A4doUserManagement/?indice=<%=i%>&attivo=<%=utenti[i].active%>" data-toggle="tooltip"
+                    data-placement="top" title="<%=testo%>" class="btn btn-sm btn-outline-secondary mr-2"><i
+                      class="<%=casella%>"></i></a>
+                  <a href="/A4doDeleteUser?indice=<%=i%>" data-toggle="tooltip" data-placement="top"
+                    title="Delete this user" class="btn btn-sm btn-outline-secondary"><i class="fas fa-trash"></i></a>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-2 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; TenjinLMS 2020</p>
+  </div>
+  <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+</body>
+
+</html>
