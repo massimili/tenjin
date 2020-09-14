@@ -1,0 +1,139 @@
+<%- include('partials/barrasuperiore', { cssFile: 'small-business.css' }) %>
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Content Row -->
+    <div class="row my-5">
+        <div class="col-md-12">
+            <div class="card rounded-0">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <h3 class="card-title">Course Management - Active Courses</h3>
+                        <div class="ml-auto">
+                            <a class="btn text-white btn-sm btn-primary mr-2" href="/courseAdd">
+                                <i class="far fa-plus-square mr-2"></i>
+                                New course
+                            </a>
+                        </div>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th></th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (var i = 0; i < corsi.length; i++) { 
+                                if (corsi[i].active == '1') {%>
+                            <tr>
+                                <th scope="row"><%= i+1 %></th>
+                                <th>
+                                    <a class="btn btn-sm btn-outline-secondary" data-toggle="tooltip"
+                                        data-placement="top" title="Move up this course" href="#">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-secondary" data-toggle="tooltip"
+                                        data-placement="top" title="Move down this course" href="#">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </a>
+                                </th>
+                                <td><%= corsi[i].title %></td>
+                                <td><%= corsi[i].start %></td>
+                                <td><%= corsi[i].end %></td>
+                                <td>
+                                    <a href="/A4courseSettings/?indice=<%=i%>" data-toggle="tooltip"
+                                        data-placement="top" title="Edit this course"
+                                        class="btn btn-sm btn-outline-secondary"><i class="fas fa-pen"></i></a>
+                                    <a href="/A4courseRemove/?indice=<%=i%>" data-toggle="tooltip" data-placement="top"
+                                        title="Remove this course" class="btn btn-sm btn-outline-secondary"><i
+                                            class="fas fa-trash"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Show this course"
+                                        class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                </td>
+                            </tr>
+
+                            <% } 
+                        }%>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <div class="card rounded-0">
+                <div class="card-body">
+                    <h3 class="card-title">Course Management - Past Courses</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (var i = 0; i < corsi.length; i++) { 
+                                                            if (corsi[i].active !== '1') {%>
+                            <tr>
+                                <th scope="row"><%= i+1 %></th>
+                                <td><%= corsi[i].title %></td>
+                                <td><%= corsi[i].start %></td>
+                                <td><%= corsi[i].end %></td>
+                                <td>
+                                    <a href="/A4courseRemove/?indice=<%=i%>" data-toggle="tooltip" data-placement="top"
+                                        title="Remove this course" class="btn btn-sm btn-outline-secondary"><i
+                                            class="fas fa-trash"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Show this course"
+                                        class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                    <a href="/A4courseSettings/?indice=<%=i%>" data-toggle="tooltip"
+                                        data-placement="top" title="Reactivate this course"
+                                        class="btn btn-sm btn-outline-secondary"><i class="fas fa-copy"></i></a>
+                                </td>
+                            </tr>
+                            <% } 
+                                                    }%>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-2 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; TenjinLMS 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+</body>
+
+</html>
